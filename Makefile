@@ -16,12 +16,14 @@ OBJ = $(SRC:.c=.o)
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-	gcc $(CFLAGS) -o $(NAME) $(OBJ) -lcsfml-audio -lcsfml-graphics -lcsfml-system -lcsfml-window
+	make -C lib/my
+	gcc $(CFLAGS) -o $(NAME) $(OBJ) -lcsfml-audio -lcsfml-graphics -lcsfml-system -lcsfml-window -Llib/my -lmy
 
 clean:
 	rm -f $(OBJ)
 
 fclean:	clean
 	rm $(NAME)
+	make -C lib/my fclean
 
 re: fclean all

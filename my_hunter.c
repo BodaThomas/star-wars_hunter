@@ -7,8 +7,20 @@
 
 #include <SFML/Audio.h>
 #include <SFML/Graphics.h>
+#include "lib.h"
+#include "hunter.h"
 
 int main(int argc, char const *argv[])
+{
+    if (argc == 2) {
+        my_putstr("StarHunter is Hunter like game.\n");
+        my_putstr("To start it, just type : ./my_hunter\n");
+        my_putstr("Have fun!");
+    }
+    game();
+}
+
+int game(void)
 {
     sfVideoMode mode = {800, 495, 32};
     sfRenderWindow* window;
@@ -54,8 +66,8 @@ int main(int argc, char const *argv[])
                 sfRenderWindow_close(window);
         }
         posX = posX + 0.1;
-        if (posX > 800 - 127)
-            posX = posX + 0.1;
+        if (posX > 800)
+            posX = -130;
         tie_pos.x = posX;
         sfSprite_setPosition(tie_sprite, tie_pos);
         sfRenderWindow_clear(window, sfBlack);

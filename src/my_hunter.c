@@ -5,9 +5,6 @@
 ** The main file of the my_hunter project
 */
 
-#include <SFML/Audio.h>
-#include <SFML/Graphics.h>
-#include "lib.h"
 #include "hunter.h"
 
 int main(int argc, char const *argv[])
@@ -37,25 +34,25 @@ int game(void)
     float posY = 0;
     sfVector2f tie_pos = {posX, posY};
 
-    window = sfRenderWindow_create(mode, "Star Hunter", sfResize | sfClose, NULL);
+    window = sfRenderWindow_create(mode, "Star Wars Hunter", sfResize | sfClose, NULL);
     if (!window)
         return (84);
-    background = sfTexture_createFromFile("assets/textures/background.png", NULL);
-    tie = sfTexture_createFromFile("assets/textures/tie.png", NULL);
+    background = sfTexture_createFromFile(BACKGROUND_PATH, NULL);
+    tie = sfTexture_createFromFile(TIE_PATH, NULL);
     if (!tie || !background)
         return (84);
     tie_sprite = sfSprite_create();
     background_sprite = sfSprite_create();
     sfSprite_setTexture(tie_sprite, tie, sfTrue);
     sfSprite_setTexture(background_sprite, background, sfTrue);
-    font = sfFont_createFromFile("assets/font/starjedi.ttf");
+    font = sfFont_createFromFile(FONT_PATH);
     if (!font)
         return (84);
     text = sfText_create();
     sfText_setString(text, "Score : ");
     sfText_setFont(text, font);
     sfText_setCharacterSize(text, 15);
-    music = sfMusic_createFromFile("assets/sounds/cantina.ogg");
+    music = sfMusic_createFromFile(MUSIC_PATH);
     if (!music)
         return (84);
     sfMusic_play(music);

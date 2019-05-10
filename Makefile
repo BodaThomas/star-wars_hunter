@@ -7,7 +7,7 @@
 
 NAME = my_hunter
 
-SRC =	my_hunter.c
+SRC =	src/my_hunter.c
 
 CFLAGS = -Iinclude
 

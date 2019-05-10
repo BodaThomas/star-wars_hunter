@@ -4,7 +4,7 @@ The Star Wars Hunter <img align="right" src="http://alpagua.com/game/sw_hunter/s
 [![Build Status](https://travis-ci.com/MrToto54/star-wars_hunter.svg?branch=master)](https://travis-ci.com/MrToto54/star-wars_hunter)
 
 The Star Wars Hunter is A small video game based on the rules of the Duck Hunt 
-Game, and with the theme of the *Star Wars (Lucasfilm)* movie.
+Game, and with the theme of the *Star Wars (Lucasfilm)* movies.
 
 **This game is currently under active development :construction:**
 

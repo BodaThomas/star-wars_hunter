@@ -40,22 +40,22 @@ int game(void)
     window = sfRenderWindow_create(mode, "Star Hunter", sfResize | sfClose, NULL);
     if (!window)
         return (84);
-    background = sfTexture_createFromFile("textures/background.png", NULL);
-    tie = sfTexture_createFromFile("textures/tie.png", NULL);
+    background = sfTexture_createFromFile("assets/textures/background.png", NULL);
+    tie = sfTexture_createFromFile("assets/textures/tie.png", NULL);
     if (!tie || !background)
         return (84);
     tie_sprite = sfSprite_create();
     background_sprite = sfSprite_create();
     sfSprite_setTexture(tie_sprite, tie, sfTrue);
     sfSprite_setTexture(background_sprite, background, sfTrue);
-    font = sfFont_createFromFile("font/starjedi.ttf");
+    font = sfFont_createFromFile("assets/font/starjedi.ttf");
     if (!font)
         return (84);
     text = sfText_create();
     sfText_setString(text, "Score : ");
     sfText_setFont(text, font);
     sfText_setCharacterSize(text, 15);
-    music = sfMusic_createFromFile("sounds/cantina.ogg");
+    music = sfMusic_createFromFile("assets/sounds/cantina.ogg");
     if (!music)
         return (84);
     sfMusic_play(music);

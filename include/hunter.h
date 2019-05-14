@@ -20,4 +20,13 @@
 
 int game(void);
 
+typedef struct assets_s {
+    sfTexture* background;
+    sfTexture* tie;
+    sfSprite* tie_sprite;
+    sfSprite* background_sprite;
+    sfFont* font;
+    sfMusic* bg_music;
+} assets_t;
+
 #endif

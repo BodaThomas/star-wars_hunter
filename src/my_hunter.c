@@ -7,27 +7,12 @@
 
 #include "hunter.h"
 
-int main(int argc, char const *argv[])
-{
-    if (argc == 2) {
-        my_putstr("StarHunter is Hunter like game.\n");
-        my_putstr("To start it, just type : ./my_hunter\n");
-        my_putstr("Have fun!");
-    }
-    game();
-}
-
 int game(void)
 {
+    assets_t *assets = malloc(sizeof(assets_t));
     sfVideoMode mode = {800, 495, 32};
     sfRenderWindow* window;
-    sfTexture* background;
-    sfTexture* tie;
-    sfSprite* tie_sprite;
-    sfSprite* background_sprite;
-    sfFont* font;
-    sfText* text;
-    sfMusic* music;
+    sfText* score_text;
     sfEvent event;
     int score = 0;
     float posX = 0;
@@ -37,26 +22,17 @@ int game(void)
     window = sfRenderWindow_create(mode, "Star Wars Hunter", sfResize | sfClose, NULL);
     if (!window)
         return (84);
-    background = sfTexture_createFromFile(BACKGROUND_PATH, NULL);
-    tie = sfTexture_createFromFile(TIE_PATH, NULL);
-    if (!tie || !background)
+    if (set_assets(assets) == 84)
         return (84);
-    tie_sprite = sfSprite_create();
-    background_sprite = sfSprite_create();
-    sfSprite_setTexture(tie_sprite, tie, sfTrue);
-    sfSprite_setTexture(background_sprite, background, sfTrue);
-    font = sfFont_createFromFile(FONT_PATH);
-    if (!font)
+    score_text = sfText_create();
+    sfText_setString(score_text, "Score : ");
+    sfText_setFont(score_text, assets->font);
+    sfText_setCharacterSize(score_text, 15);
+    assets->bg_music = sfMusic_createFromFile(MUSIC_PATH);
+    if (!assets->bg_music)
         return (84);
-    text = sfText_create();
-    sfText_setString(text, "Score : ");
-    sfText_setFont(text, font);
-    sfText_setCharacterSize(text, 15);
-    music = sfMusic_createFromFile(MUSIC_PATH);
-    if (!music)
-        return (84);
-    sfMusic_play(music);
-    sfMusic_setLoop(music, sfTrue);
+    sfMusic_play(assets->bg_music);
+    sfMusic_setLoop(assets->bg_music, sfTrue);
     while (sfRenderWindow_isOpen(window)) {
         while (sfRenderWindow_pollEvent(window, &event)) {
             if (event.type == sfEvtClosed)
@@ -66,20 +42,20 @@ int game(void)
         if (posX > 800)
             posX = -130;
         tie_pos.x = posX;
-        sfSprite_setPosition(tie_sprite, tie_pos);
+        sfSprite_setPosition(assets->tie_sprite, tie_pos);
         sfRenderWindow_clear(window, sfBlack);
-        sfRenderWindow_drawSprite(window, background_sprite, NULL);
-        sfRenderWindow_drawSprite(window, tie_sprite, NULL);
-        sfRenderWindow_drawText(window, text, NULL);
+        sfRenderWindow_drawSprite(window, assets->background_sprite, NULL);
+        sfRenderWindow_drawSprite(window, assets->tie_sprite, NULL);
+        sfRenderWindow_drawText(window, score_text, NULL);
         sfRenderWindow_display(window);
     }
-    sfMusic_destroy(music);
-    sfText_destroy(text);
-    sfFont_destroy(font);
-    sfSprite_destroy(tie_sprite);
-    sfSprite_destroy(background_sprite);
-    sfTexture_destroy(tie);
-    sfTexture_destroy(background);
+    sfMusic_destroy(assets->bg_music);
+    sfText_destroy(score_text);
+    sfFont_destroy(assets->font);
+    sfSprite_destroy(assets->tie_sprite);
+    sfSprite_destroy(assets->background_sprite);
+    sfTexture_destroy(assets->tie);
+    sfTexture_destroy(assets->background);
     sfRenderWindow_destroy(window);
     return (0);
 }

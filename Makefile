@@ -7,9 +7,11 @@
 
 NAME = my_hunter
 
-SRC =	src/my_hunter.c
+SRC =	src/main.c \
+		src/my_hunter.c \
+		src/assets.c
 
-CFLAGS = -Iinclude
+CFLAGS = -Iinclude -Wall -Wextra -Iinclude
 
 OBJ = $(SRC:.c=.o)
 
